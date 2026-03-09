@@ -27,6 +27,8 @@ public class Memo {
     @NotBlank(message = "内容を入力してください")
     @Column(nullable = false, length = 1000)
     private String content;
+    
+    private Priority priority;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createdAt;
