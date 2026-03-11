@@ -10,6 +10,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Entity
@@ -28,6 +29,7 @@ public class Memo {
     @Column(nullable = false, length = 1000)
     private String content;
     
+    @NotNull(message = "優先度を選択してください")
     private Priority priority;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")

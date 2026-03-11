@@ -31,7 +31,7 @@ public class MemoController {
 
     @GetMapping
     public String list(Model model) {
-        List<Memo> memos = memoRepository.findAll();
+        List<Memo> memos = memoRepository.findAllByOrderByPriorityAsc();
         model.addAttribute("memos", memos);
         return "memo-list";
     }
