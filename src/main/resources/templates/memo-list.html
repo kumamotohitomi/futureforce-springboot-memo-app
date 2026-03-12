@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>メモ一覧</title>
-    <form method="get" action="/memo">
+    <form method="get" th:action="@{/memo/search}">
     <input type="text" name="keyword" placeholder="検索キーワード">
     <button type="submit">検索</button>
     </form>

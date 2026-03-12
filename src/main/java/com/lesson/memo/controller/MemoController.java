@@ -29,15 +29,14 @@ public class MemoController {
     @Autowired
     private MemoRepository memoRepository;
 
-    @GetMapping
-    public String list(
-    		@RequestParam(required = false) String keyword,
+    @GetMapping("/search")
+    public String search(@RequestParam(required = false) String keyword,
     		Model model) {
     		List<Memo> memos;
     		    if (keyword == null || keyword.isEmpty()) {
     		        memos = memoRepository.findAll();
     		       } else {
-    		       memos = memoRepository.findByTitleContaining(keyword);
+    		        memos = memoRepository.findByTitleContaining(keyword);
     		       }
     		model.addAttribute("memos", memos);
     		return "memo-list";
