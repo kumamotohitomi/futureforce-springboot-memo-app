@@ -28,6 +28,13 @@ public class MemoController {
     @Autowired
     private MemoRepository memoRepository;
     
+    @GetMapping("") 
+    public String list(Model model) { 
+        List<Memo> memos = memoRepository.findAll();
+        model.addAttribute("memos", memos);
+        return "memo-list";
+    }
+    
     @GetMapping("/new")
     public String showForm(Model model) {
         model.addAttribute("memo", new Memo());
