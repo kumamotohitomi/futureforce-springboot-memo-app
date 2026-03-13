@@ -25,24 +25,9 @@ import jakarta.validation.Valid;
 @Controller
 @RequestMapping("/memo")
 public class MemoController {
-
     @Autowired
     private MemoRepository memoRepository;
-
-    @GetMapping("/search")
-    public String search(@RequestParam(required = false) String keyword,
-    		Model model) {
-    		List<Memo> memos;
-    		    if (keyword == null || keyword.isEmpty()) {
-    		        memos = memoRepository.findAll();
-    		       } else {
-    		        memos = memoRepository.findByTitleContaining(keyword);
-    		       }
-    		model.addAttribute("memos", memos);
-    		return "memo-list";
-    		}
-
-
+    
     @GetMapping("/new")
     public String showForm(Model model) {
         model.addAttribute("memo", new Memo());
@@ -74,6 +59,18 @@ public class MemoController {
         model.addAttribute("memo", memo.get());
         return "memo-detail";
     }
+    
+    @GetMapping("/search")
+    public String search(@RequestParam(required = false) String keyword,Model model) {
+    		List<Memo> memos;
+    		    if (keyword == null || keyword.isEmpty()) {
+    		        memos = memoRepository.findAll();
+    		       } else {
+    		        memos = memoRepository.findByTitleContaining(keyword);
+    		       }
+    		model.addAttribute("memos", memos);
+    		return "memo-list";
+    		}
 
     @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable Long id, Model model, HttpServletResponse response) {
