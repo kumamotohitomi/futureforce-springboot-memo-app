@@ -30,19 +30,24 @@ public class MemoController {
     private MemoRepository memoRepository;
 
     @GetMapping
-    public String list(
-    		@RequestParam(required = false) String keyword,
-    		  Model model) {
-    		List<Memo> memos;
-    		  if (keyword == null || keyword.isEmpty()) {
-    		  memos = memoRepository.findAll();
-    		  } else {
-    		  memos = memoRepository.findByTitleContaining(keyword);
-    		  }
-    		model.addAttribute("memos", memos);
-    		return "memo-list";
-    		}
+    public String list(Model model) {
+        List<Memo> memos = memoRepository.findAll();
+        model.addAttribute("memos", memos);
+        return "memo-list";
+    }
     
+    @GetMapping("/memo/search")
+    public String search(
+            @RequestParam(required = false) String keyword, Model model) {
+        List<Memo> memos;
+        if (keyword == null || keyword.isEmpty()) {
+            memos = memoRepository.findAll();
+        } else {
+            memos = memoRepository.findByTitleContainingOrContentContaining(keyword, keyword);
+        }
+        model.addAttribute("memos", memos);
+        return "memo-list";
+    }
 
     @GetMapping("/new")
     public String showForm(Model model) {
