@@ -36,7 +36,7 @@ public class MemoController {
         return "memo-list";
     }
     
-    @GetMapping("/memo/search")
+    @GetMapping("/search")
     public String search(
             @RequestParam(required = false) String keyword, Model model) {
         List<Memo> memos;
