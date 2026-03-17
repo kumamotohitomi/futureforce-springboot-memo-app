@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <title>メモ一覧</title>
+    <form method="get" th:action="@{/memo/search}">
+    </form>
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css">
@@ -21,11 +23,18 @@
             <button type="submit">検索</button>
  　 　　     </form>
         </div>
-
+        
         <div class="notes-grid">
             <div class="note-card" th:each="memo : ${memos}">
                 <div class="note-card-header">
                     <h3 class="note-card-title" th:text="${memo.title}">タイトル</h3>
+                    
+                    <span class="note-badge high"
+                          th:if="${memo.priority.name() == 'HIGH'}">高</span>
+                    <span class="note-badge medium"
+                          th:if="${memo.priority.name() == 'MEDIUM'}">中</span>
+                    <span class="note-badge low"
+                          th:if="${memo.priority.name() == 'LOW'}">低</span>   
                 </div>
                 <div class="note-card-content">
                     <p class="note-card-text" th:text="${memo.content}">内容</p>
