@@ -73,7 +73,7 @@ public class MemoController {
     		    if (keyword == null || keyword.isEmpty()) {
     		        memos = memoRepository.findAll();
     		       } else {
-    		        memos = memoRepository.findByTitleContaining(keyword);
+    		        memos = memoRepository.findByTitleContainingOrContentContaining(keyword, keyword);
     		       }
     		model.addAttribute("memos", memos);
     		return "memo-list";
@@ -134,7 +134,6 @@ public class MemoController {
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
             return "not-found";
         }
-
         return "redirect:/memo";
     }
 }

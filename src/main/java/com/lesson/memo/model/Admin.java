@@ -10,10 +10,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-package com.lesson.memo.controller;
-
-package com.lesson.memo.model;
-
 @Entity
 public class Admin {
 	@Id
@@ -21,10 +17,10 @@ public class Admin {
     private Long id;
 	
     @Column(nullable = false, length = 255)
-    private String last_name;
+    private String lastName;
     
     @Column(nullable = false, length = 255)
-    private String first_name;
+    private String firstName;
     
     @Column(nullable = false, length = 255, unique = true)
     private String email; 
