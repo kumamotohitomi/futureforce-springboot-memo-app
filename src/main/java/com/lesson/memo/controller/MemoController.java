@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.lesson.memo.model.Memo;
@@ -25,13 +26,25 @@ import jakarta.validation.Valid;
 @Controller
 @RequestMapping("/memo")
 public class MemoController {
-
     @Autowired
     private MemoRepository memoRepository;
 
     @GetMapping
     public String list(Model model) {
         List<Memo> memos = memoRepository.findAllByOrderByPriorityAsc();
+        model.addAttribute("memos", memos);
+        return "memo-list";
+    }
+    
+    @GetMapping("/search")
+    public String search(
+          @RequestParam(required = false) String keyword, Model model) {
+        List<Memo> memos;
+        if (keyword == null || keyword.isEmpty()) {
+            memos = memoRepository.findAll();
+        } else {
+            memos = memoRepository.findByTitleContainingOrContentContaining(keyword, keyword);
+        }
         model.addAttribute("memos", memos);
         return "memo-list";
     }

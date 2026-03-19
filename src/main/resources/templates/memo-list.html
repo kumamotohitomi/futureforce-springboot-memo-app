@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <title>メモ一覧</title>
+    <form method="get" th:action="@{/memo/search}">
+    </form>
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css">
@@ -16,8 +18,12 @@
             <a th:href="@{/memo/new}" class="btn btn-primary">
                 <i class="ri-add-circle-line"></i> 新規メモ
             </a>
+            <form th:action="@{/memo/search}" method="get">
+            <input type="text" name="keyword" placeholder="検索" style="width:200px;">
+            <button type="submit">検索</button>
+ 　 　　     </form>
         </div>
-
+        
         <div class="notes-grid">
             <div class="note-card" th:each="memo : ${memos}">
                 <div class="note-card-header">
