@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.lesson.memo.model.Memo;
+import com.lesson.memo.model.Priority;
 import com.lesson.memo.repository.MemoRepository;
 
 import jakarta.servlet.http.HttpServletResponse;
@@ -27,10 +28,10 @@ import jakarta.validation.Valid;
 public class MemoController {
     @Autowired
     private MemoRepository memoRepository;
-    
-    @GetMapping("") 
-    public String list(Model model) { 
-        List<Memo> memos = memoRepository.findAll();
+
+    @GetMapping
+    public String list(Model model) {
+        List<Memo> memos = memoRepository.findAllByOrderByPriorityAsc();
         model.addAttribute("memos", memos);
         return "memo-list";
     }
@@ -38,6 +39,7 @@ public class MemoController {
     @GetMapping("/new")
     public String showForm(Model model) {
         model.addAttribute("memo", new Memo());
+        model.addAttribute("priorities", Priority.values());
         return "memo-form";
     }
 
@@ -73,7 +75,12 @@ public class MemoController {
     		    if (keyword == null || keyword.isEmpty()) {
     		        memos = memoRepository.findAll();
     		       } else {
+<<<<<<< HEAD
     		        memos = memoRepository.findByTitleContainingOrContentContaining(keyword, keyword);
+=======
+    		        memos = memoRepository
+    		        		.findByTitleContainingOrContentContaining(keyword, keyword);
+>>>>>>> refs/heads/develop
     		       }
     		model.addAttribute("memos", memos);
     		return "memo-list";
@@ -88,6 +95,7 @@ public class MemoController {
         return memoRepository.findById(id)
                 .map(memo -> {
                     model.addAttribute("memo", memo);
+                    model.addAttribute("priorities", Priority.values());
                     return "memo-form";
                 })
                 .orElseGet(() -> {
@@ -120,8 +128,8 @@ public class MemoController {
         memoToUpdate.setTitle(memo.getTitle());
         memoToUpdate.setContent(memo.getContent());
         memoToUpdate.setUpdatedAt(LocalDateTime.now());
+        memoToUpdate.setPriority(memo.getPriority());
         memoRepository.save(memoToUpdate);
-
         return "redirect:/memo/detail/" + id;
     }
 
