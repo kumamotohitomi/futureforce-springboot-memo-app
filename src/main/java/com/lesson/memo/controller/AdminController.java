@@ -1,13 +1,10 @@
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import org.springframework.security.crypto.password.PasswordEncoder;
-
 import com.lesson.memo.model.Admin;
 import com.lesson.memo.repository.AdminRepository;
-
-package com.lesson.memo.controller;
 
 @Controller
 public class AdminController {
@@ -27,5 +24,3 @@ public class AdminController {
 	        return "redirect:/admin/signin";
 	    }
 	}
-
-}
