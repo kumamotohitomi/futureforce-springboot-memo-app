@@ -16,17 +16,16 @@ public class SecurityConfig {
       return new BCryptPasswordEncoder(); //パスワード暗号化
   }
 
-
  @Bean
   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
-    http.authorizeHttpRequests(authz -> authz
+    http.authorizeHttpRequests(auth -> auth
             .requestMatchers("/admin/signup", "/admin/signin","/css/**", "/js/**").permitAll()
             .anyRequest().authenticated()
     ).formLogin(login -> login
             .loginPage("/admin/signin")//ログインURL
-            .loginProcessingUrl("/login")//ログインボタン押したときの接続先
+            .loginProcessingUrl("/admin/signin")//ログインボタン押したときの接続先
             .failureUrl("/admin/signin?error=true")//失敗したら
-            .defaultSuccessUrl("/admin/memos", true)
+            .defaultSuccessUrl("/admin/memos", true)//成功したら
             .usernameParameter("email")//メールでログイン
             .passwordParameter("password")//パスワードログイン
     ).logout(logout -> logout
