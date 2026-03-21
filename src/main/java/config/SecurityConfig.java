@@ -7,8 +7,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.stereotype.Service;
 
-
+@Service
 @Configuration
 public class SecurityConfig {
  @Bean
@@ -30,9 +31,8 @@ public class SecurityConfig {
             .passwordParameter("password")//パスワードログイン
     ).logout(logout -> logout
             .logoutRequestMatcher(new AntPathRequestMatcher("/admin/logout"))
-            .logoutSuccessUrl("/logout")
-            .invalidateHttpSession(true)
-            .deleteCookies("JSESSIONID")
+            .logoutSuccessUrl("/admin/signin?logout")
+            .permitAll()
     );
     return http.build();
    }

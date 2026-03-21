@@ -26,6 +26,11 @@ public class AdminController {
 	        return "redirect:/admin/signup";
 	    }
 	    
+	    @GetMapping("/admin/signup")
+	    public String showSignup(Admin admin) {
+	        return "admin/signup"; 
+	    }
+	    
 	    @GetMapping("/admin/signin")
 	    public String showSignin() {
 	        return "admin/signin"; // admin/signin.htmlを表示
