@@ -1,4 +1,4 @@
-package security;
+package com.lesson.memo.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -17,11 +17,11 @@ public class AdminDetailService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        // ① 名簿からアドレス検索（いなければエラーを出す）
+        // 名簿からアドレス検索（いなければエラーを出す）
         Admin admin = adminRepository.findByEmail(email)
             .orElseThrow(() -> new UsernameNotFoundException("見つかりません"));
 
-        // ② 見つかった方の「メール」「パスワード」「権限」をセットにしてSpringに渡す
+        // 見つかったら「メール」「パスワード」「権限」をセットにして渡す
         return new User(admin.getEmail(), admin.getPassword(), 
             AuthorityUtils.createAuthorityList("ROLE_ADMIN"));
     }
