@@ -24,9 +24,10 @@ public class SecurityConfig {
             .loginPage("/admin/signin")//ログインURL
             .loginProcessingUrl("/admin/signin")//ログインボタン押したときの接続先
             .failureUrl("/admin/signin?error=true")//失敗したら
-            .defaultSuccessUrl("/admin/memos", true)//成功したら
+            .defaultSuccessUrl("/memo", true)//成功したら
             .usernameParameter("email")//メールでログイン
             .passwordParameter("password")//パスワードログイン
+            .permitAll()
     ).logout(logout -> logout
             .logoutRequestMatcher(new AntPathRequestMatcher("/admin/logout"))
             .logoutSuccessUrl("/admin/signin?logout")
