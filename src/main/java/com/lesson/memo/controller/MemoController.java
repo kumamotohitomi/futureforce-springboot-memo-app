@@ -43,7 +43,7 @@ public class MemoController {
         if (keyword == null || keyword.isEmpty()) {
             memos = memoRepository.findAll();
         } else {
-            memos = memoRepository.findByTitleContainingOrContentContaining(keyword, keyword);
+            memos = memoRepository.findByTitleContainingOrContentContaining(keyword,keyword);
         }
         model.addAttribute("memos", memos);
         return "memo-list";
