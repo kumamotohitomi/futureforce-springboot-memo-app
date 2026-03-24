@@ -6,10 +6,12 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
 import com.lesson.memo.model.Admin;
 import com.lesson.memo.repository.AdminRepository;
 
+@Service
 //ユーザーが入力したアドレスをリポジトリと照合
 public class AdminDetailService implements UserDetailsService {
 	@Autowired
