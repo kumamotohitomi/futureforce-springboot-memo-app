@@ -46,13 +46,13 @@
                 </div>
             </div>
         </div>
-        
+        <!--ログアウトボタン-->
         <div style="text-align: right;">
     　　　　　<form th:action="@{/admin/logout}" method="post">
         　　 <button type="submit">ログアウト</button>
             </form>
         </div>
-
+        
         <div th:if="${memos.isEmpty()}" class="empty-state">
             <p>メモがありません</p>
             <a th:href="@{/memo/new}" class="btn btn-primary">新しいメモを作成</a>
