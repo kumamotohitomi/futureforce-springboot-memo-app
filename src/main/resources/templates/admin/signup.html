@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+　　　<title>管理者登録</title>
+
+</head>
+<body>
+　　　<h1>管理者新規登録</h1>
+        <form th:action="@{/admin/signup}" method="post" th:object="${admin}">
+        <div>メールアドレス：<input type="email" name="email" required></div>
+        <div>パスワード：<input type="password" name="password" required></div>
+        <div> 姓：<input type="text" name="lastName"> </div>
+        <div> 名：<input type="text" name="firstName"></div>
+        <button type="submit">登録する</button>
+        </form>
+    
+    <hr>
+    <a th:href="@{/admin/signin}">すでに登録済みの方（ログイン）</a>
+</body>
+</html>
