@@ -46,12 +46,6 @@
                 </div>
             </div>
         </div>
-        
-        <div style="text-align: right;">
-    　　　　　<form th:action="@{/admin/logout}" method="post">
-        　　 <button type="submit">ログアウト</button>
-            </form>
-        </div>
 
         <div th:if="${memos.isEmpty()}" class="empty-state">
             <p>メモがありません</p>
